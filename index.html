@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jquery.expectr example</title>
+  </head>
+
+  <body>
+	<h1>Hic sunt leones.</h1>
+	(look at the alert!)
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script src="jquery.expectr.js"></script>
+	<script>
+		$(document).ready(function(){
+			$.expectJSON(
+				"/hello/world", // the URL you will call with the regular jQuery.getJSON
+				{ foo: "bar" }, // the JSON object you are expecting
+				500 // optional, to simulate a delay on the server response
+			);
+
+			// all normal from now on :)
+			$.getJSON("/hello/world", function(data){
+				// do something with your json
+				alert(data.foo);
+			});
+
+			$.expectPost("/goodbye/moon", "ok", 100);
+
+			$.post("/goodbye/moon", function(data){
+				alert("Ok? "+data);
+			});
+		});
+	</script>
+
+  </body>
+</html>
